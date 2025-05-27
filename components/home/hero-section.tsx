@@ -42,27 +42,26 @@ function HeroSection() {
               <div className="text-sm text-gray-400">Monthly Readers</div>
             </div>
           </div>
-
         </div>
-          <div className="mt-12 flex-1 md:mt-0">
-            <div
-              className={cn(
-                "relative mx-auto w-64 h-64 rounded-2xl overflow-hidden",
-                "bg-gradient-to-br from-white/5 to-transparent",
-                "border border-white backdrop-blur-lg",
-                "shadow-2xl shadow-indigo-500/10"
-              )}
-            >
-              <Image
-                src={
-                  "https://plus.unsplash.com/premium_photo-1726729274971-4ef1018ee08a?q=80&w=768&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-                fill
-                alt="hero-im"
-                className="object-cover"
-              />
-            </div>
+        <div className="mt-12 flex-1 md:mt-0">
+          <div
+            className={cn(
+              "relative mx-auto w-64 h-64 rounded-2xl overflow-hidden",
+              "bg-gradient-to-br from-white/5 to-transparent",
+              "border border-white backdrop-blur-lg",
+              "shadow-2xl shadow-indigo-500/10"
+            )}
+          >
+            <Image
+              src={
+                "https://plus.unsplash.com/premium_photo-1726729274971-4ef1018ee08a?q=80&w=768&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              fill
+              alt="hero-im"
+              className="object-cover"
+            />
           </div>
+        </div>
       </div>
     </section>
   );
