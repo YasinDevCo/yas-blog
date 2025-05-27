@@ -20,6 +20,7 @@ function TopArticles() {
           <Link href={`/articles/${12}`}>
             <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl">
               <Image
+              sizes="fill"
                 alt="article"
                 src={
                   "https://plus.unsplash.com/premium_photo-1664300190675-f4c2058a9953?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -30,7 +31,7 @@ function TopArticles() {
             </div>
             <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={""} />
+                <AvatarImage sizes="fill" src={""} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <span>Sara hernandez</span>
