@@ -17,7 +17,7 @@ export default function Home() {
               Featured Articles
             </h2>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              Discover our most popular and trending content
+              Discover our most popular and trending contents
             </p>
           </div>
 
