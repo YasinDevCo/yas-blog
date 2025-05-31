@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+const nextConfig = {
+  appDir: true,  // بدون experimental
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -14,7 +13,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "plus.unsplash.com",
-        pathname: "/**", // ← این خط برای حل خطا ضروری است
+        pathname: "/**",
       },
     ],
   },
