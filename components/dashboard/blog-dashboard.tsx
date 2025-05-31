@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { ChartBar, FileText, MessageCircle, PlusCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import ReactArticles from "./react-article";
 
 const BlogDashboard = () => {
   return (
@@ -61,6 +62,8 @@ const BlogDashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      <ReactArticles/>
     </main>
   );
 };
