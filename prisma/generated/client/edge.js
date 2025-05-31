@@ -169,10 +169,6 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
-      },
-      {
-        "fromEnvVar": null,
-        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -199,8 +195,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated/client\" // مسیر محلی داخل پروژه\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"] // بسیار مهم برای Vercel\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          String    @id @default(cuid())\n  clerkUserId String    @unique\n  email       String    @unique\n  name        String\n  imageUrl    String?\n  articles    Article[] // رابطه یک‌به‌چند با Article\n  comments    Comment[]\n  likes       Like[]\n}\n\nmodel Article {\n  id           String    @id @default(cuid())\n  title        String\n  content      String\n  category     String\n  featureImage String\n  author       User      @relation(fields: [authorId], references: [id])\n  authorId     String\n  comments     Comment[]\n  likes        Like[]\n  createdAt    DateTime  @default(now())\n}\n\nmodel Comment {\n  id        String   @id @default(cuid())\n  body      String\n  author    User     @relation(fields: [authorId], references: [id])\n  authorId  String\n  article   Article  @relation(fields: [articleId], references: [id])\n  articleId String\n  createdAt DateTime @default(now())\n}\n\nmodel Like {\n  id        String   @id @default(cuid())\n  user      User     @relation(fields: [userId], references: [id])\n  userId    String\n  article   Article  @relation(fields: [articleId], references: [id])\n  articleId String\n  createdAt DateTime @default(now())\n\n  @@unique([userId, articleId])\n}\n",
-  "inlineSchemaHash": "90d24a3ab8766a52dc8da5436aa6a37662eed91f5493bca8f6d8b88cc779b505",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"./generated/client\"\n  binaryTargets = [\"native\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          String    @id @default(cuid())\n  clerkUserId String    @unique\n  email       String    @unique\n  name        String\n  imageUrl    String?\n  articles    Article[] // رابطه یک‌به‌چند با Article\n  comments    Comment[]\n  likes       Like[]\n}\n\nmodel Article {\n  id           String    @id @default(cuid())\n  title        String\n  content      String\n  category     String\n  featureImage String\n  author       User      @relation(fields: [authorId], references: [id])\n  authorId     String\n  comments     Comment[]\n  likes        Like[]\n  createdAt    DateTime  @default(now())\n}\n\nmodel Comment {\n  id        String   @id @default(cuid())\n  body      String\n  author    User     @relation(fields: [authorId], references: [id])\n  authorId  String\n  article   Article  @relation(fields: [articleId], references: [id])\n  articleId String\n  createdAt DateTime @default(now())\n}\n\nmodel Like {\n  id        String   @id @default(cuid())\n  user      User     @relation(fields: [userId], references: [id])\n  userId    String\n  article   Article  @relation(fields: [articleId], references: [id])\n  articleId String\n  createdAt DateTime @default(now())\n\n  @@unique([userId, articleId])\n}\n",
+  "inlineSchemaHash": "6403318b394db12ba780f3c8ded4fba28664a3e6dc9c015f503ddd9accf81302",
   "copyEngine": true
 }
 config.dirname = '/'
