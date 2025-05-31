@@ -1,7 +1,9 @@
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native"]
+  provider      = "prisma-client-js"
+  output        = "./generated/client" // مسیر محلی داخل پروژه
+  binaryTargets = ["native", "rhel-openssl-3.0.x"] // بسیار مهم برای Vercel
 }
+
 
 datasource db {
   provider = "postgresql"

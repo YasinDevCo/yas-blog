@@ -3,6 +3,7 @@
   "functions": {
     "api/**.ts": {
       "includeFiles": [
+        "prisma/generated/client/**",
         "node_modules/.prisma/client/**",
         "node_modules/@prisma/client/**"
       ]

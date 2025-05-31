@@ -1,0 +1,55 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated/client" // مسیر محلی داخل پروژه
+  binaryTargets = ["native", "rhel-openssl-3.0.x"] // بسیار مهم برای Vercel
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String    @id @default(cuid())
+  clerkUserId String    @unique
+  email       String    @unique
+  name        String
+  imageUrl    String?
+  articles    Article[] // رابطه یک‌به‌چند با Article
+  comments    Comment[]
+  likes       Like[]
+}
+
+model Article {
+  id           String    @id @default(cuid())
+  title        String
+  content      String
+  category     String
+  featureImage String
+  author       User      @relation(fields: [authorId], references: [id])
+  authorId     String
+  comments     Comment[]
+  likes        Like[]
+  createdAt    DateTime  @default(now())
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, articleId])
+}
