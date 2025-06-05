@@ -1,7 +1,4 @@
 {
-  "functions": {
-    "app/api/**/*.ts": {
-      "includeFiles": "prisma/generated/client/**"
-    }
-  }
+ 
+  "buildCommand": "npx prisma generate && npm run build"
 }
