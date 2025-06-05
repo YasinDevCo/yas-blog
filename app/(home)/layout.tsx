@@ -2,24 +2,23 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
   const user = await currentUser();
-  if (!user) return null;
-
-  const loggedInUser = await prisma.user.findUnique({
-    where: { clerkUserId: user.id },
-  });
-  if (!loggedInUser) {
-    await prisma.user.create({
-      data: {
-        name: user.fullName as string,
+  console.log(user);
+  if (user) {
+    await prisma.user.upsert({
+      where: { clerkUserId: user.id },
+      update: {},
+      create: {
+        name: user.fullName || "",
         clerkUserId: user.id,
-        email: user.emailAddresses[0].emailAddress,
+        email: user.emailAddresses[0]?.emailAddress || "",
         imageUrl: user.imageUrl,
       },
     });
   }
+
   return <div>{children}</div>;
 };
 
-export default layout;
+export default Layout;
