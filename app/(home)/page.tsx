@@ -32,7 +32,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <BlogFooter />sg
+      <BlogFooter />
     </main>
   );
 }

@@ -3,9 +3,30 @@ import React from "react";
 import { Button } from "../ui/button";
 import { ChartBar, FileText, MessageCircle, PlusCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import ReactArticles from "./react-article";
+import RecentArticles from "./recent-article";
+import { prisma } from "@/lib/prisma";
 
-const BlogDashboard = () => {
+const BlogDashboard = async () => {
+  const [article, totalComments] = await Promise.all([
+    prisma.article.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        comments: true,
+        author: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            imageUrl: true,
+          },
+        },
+      },
+    }),
+    prisma.comment.count(),
+  ]);
+
   return (
     <main className="flex-1 p-4 md:p-8">
       <div className="flex justify-between items-center mb-8">
@@ -31,8 +52,10 @@ const BlogDashboard = () => {
             <MessageCircle className="h-5 w-5" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
-            <p className="text-sm text-muted-foreground mt-1 ">13 awaiting moderation</p>
+            <div className="text-2xl font-bold">{totalComments}</div>
+            <p className="text-sm text-muted-foreground mt-1 ">
+              13 awaiting moderation
+            </p>
           </CardContent>
         </Card>
 
@@ -45,7 +68,9 @@ const BlogDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4.3</div>
-            <p className="text-sm text-muted-foreground mt-1 ">+0.5 from last month</p>
+            <p className="text-sm text-muted-foreground mt-1 ">
+              +0.5 from last month
+            </p>
           </CardContent>
         </Card>
 
@@ -55,15 +80,17 @@ const BlogDashboard = () => {
               Total Articles
             </CardTitle>
             <FileText className="h-5 w-5" />
-          </CardHeader >
+          </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">2</div>
-            <p className="text-sm text-muted-foreground mt-1 ">+ 5 from last month</p>
+            <div className="text-2xl font-bold">{article.length}</div>
+            <p className="text-sm text-muted-foreground mt-1 ">
+              + 5 from last month
+            </p>
           </CardContent>
         </Card>
       </div>
 
-      <ReactArticles/>
+      <RecentArticles article={article} />
     </main>
   );
 };
