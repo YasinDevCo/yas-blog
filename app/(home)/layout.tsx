@@ -4,7 +4,6 @@ import React from "react";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const user = await currentUser();
-  console.log(user);
   if (user) {
     await prisma.user.upsert({
       where: { clerkUserId: user.id },

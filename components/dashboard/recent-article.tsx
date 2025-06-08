@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import {
@@ -12,6 +13,7 @@ import {
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Prisma } from "@prisma/client";
+import { deleteArticle } from "@/actions/delete-article";
 
 type RecentArticlesProps = {
   article: Prisma.ArticleGetPayload<{
@@ -78,7 +80,7 @@ const RecentArticles: React.FC<RecentArticlesProps> = ({ article }) => {
                             Edit
                           </Button>
                         </Link>
-                        <DeleteButton />
+                        <DeleteButton articleId={item.id} />
                       </div>
                     </TableCell>
                   </TableRow>
@@ -94,11 +96,21 @@ const RecentArticles: React.FC<RecentArticlesProps> = ({ article }) => {
 
 export default RecentArticles;
 
-const DeleteButton = () => {
+type DeleteButtonProps = {
+  articleId: string;
+};
+const DeleteButton: React.FC<DeleteButtonProps> = ({ articleId }) => {
+  const [isPending, startTransition] = useTransition();
   return (
-    <form action="">
-      <Button variant={"ghost"} size={"sm"} type="submit">
-        Delete
+    <form
+      action={() => {
+        startTransition(async () => {
+          await deleteArticle(articleId);
+        });
+      }}
+    >
+      <Button disabled={isPending} variant={"ghost"} size={"sm"} type="submit">
+        {isPending ? "Loading..." : "Delete"}
       </Button>
     </form>
   );

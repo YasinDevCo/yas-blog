@@ -15,29 +15,31 @@ export default function SimpleEditor({ onChange, initialData }: SimpleEditorProp
   const ejInstance = useRef<EditorJS | null>(null);
   const editorHolderId = 'editorjs';
 
-  useEffect(() => {
-    if (!ejInstance.current) {
-      ejInstance.current = new EditorJS({
-        holder: editorHolderId,
-        autofocus: true,
-        data: initialData,
-        tools: {
-          header: Header,
-          list: List,
-          quote: Quote,
-        },
-        onChange: async () => {
-          const content = await ejInstance.current?.save();
-          onChange && onChange(content);
-        },
-      });
-    }
+useEffect(() => {
+  if (!ejInstance.current) {
+    ejInstance.current = new EditorJS({
+      holder: editorHolderId,
+      autofocus: true,
+      data: initialData,
+      tools: {
+        header: Header,
+        list: List,
+        quote: Quote,
+      },
+      onChange: async () => {
+        const content = await ejInstance.current?.save();
+        onChange && onChange(content);
+      },
+    });
+  }
 
-    return () => {
-      ejInstance.current?.destroy();
-      ejInstance.current = null;
-    };
-  }, []);  // فقط یک بار اجرا میشه (برای mount)
+  return () => {
+    if (ejInstance.current && typeof ejInstance.current.destroy === 'function') {
+      ejInstance.current.destroy();
+    }
+    ejInstance.current = null;
+  };
+}, []);
 
   return (
     <div>
