@@ -1,18 +1,13 @@
-"use client";
 import { BlogFooter } from "@/components/home/blog-footer";
 import Navbar from "@/components/home/header/Navbar";
 import HeroSection from "@/components/home/hero-section";
 import TopArticles from "@/components/home/top-articles";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    alert(
-      "برخی از خدمات ممکن است به دلیل محدودیت‌های شبکه در دسترس نباشند. لطفاً در صورت نیاز از VPN استفاده کنید"
-    );
-  }, []);
+
   return (
     <main>
       <Navbar />
