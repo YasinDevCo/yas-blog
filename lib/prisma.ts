@@ -1,5 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+
+// prisma
+//   .$connect()
+//   .then(() => {
+//     console.log("connected ✅");
+//   })
+//   .catch((err) => {
+//     console.error("failed ❌", err);
+//   });
 
 export { prisma };

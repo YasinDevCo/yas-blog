@@ -1,6 +1,7 @@
-import { ArticleDetailPage } from "@/components/article/article-detail-page";
+import  ArticleDetailPage  from "@/components/article/article-detail-page";
 import { prisma } from "@/lib/prisma";
 import React from "react";
+import Navbar from "@/components/home/header/Navbar";
 
 type ArticleDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -27,7 +28,9 @@ const page: React.FC<ArticleDetailPageProps> = async ({ params }) => {
   }
   return (
     <div>
-      <ArticleDetailPage article={article} /> 
+      <Navbar />
+
+      <ArticleDetailPage article={article} />
     </div>
   );
 };

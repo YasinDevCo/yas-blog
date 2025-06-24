@@ -1,36 +1,48 @@
 import React from "react";
-import { Avatar } from "../ui/avatar";
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Prisma } from "@prisma/client";
 
-const CommentList = () => {
+type CommentListProps = {
+  comments: Prisma.CommentGetPayload<{
+    include: {
+      author: {
+        select: {
+          name: true;
+          email: true;
+          imageUrl: true;
+        };
+      };
+    };
+  }>[];
+};
+
+const CommentList: React.FC<CommentListProps> = ({ comments }) => {
   return (
     <div className="space-y-8">
-      <div className="flex gap-4">
-        <Avatar className="h-10 w-10">
-          <AvatarImage
-            src={
-              // article.author.imageUrl ||
-              ""
-            }
-          />
-          <AvatarFallback>
-            {/* {article.author.name
-                    ? article.author.name
-                        .split(" ")
-                        .map((n: string) => n[0])
-                        .join("")
-                    : "AU"} */}
-                    CN
-          </AvatarFallback>
-        </Avatar>
-        <div className="flex-1">
-          <div className="mb-2">
-            <span className="font-medium">author name</span>
-            <span className="text-sm ml-2">12 feb</span>
+      {comments.map((comment) => (
+        <div className="flex gap-4" key={comment.id}>
+          <Avatar className="h-10 w-10">
+            <AvatarImage src={comment.author.imageUrl || ""} />
+            <AvatarFallback>
+              {comment.author.name
+                ? comment.author.name
+                    .split(" ")
+                    .map((n: string) => n[0])
+                    .join("")
+                : "AU"}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1">
+            <div className="mb-2">
+              <span className="font-medium">{comment.author.name}</span>
+              <span className="text-sm ml-2">
+                {comment.createdAt.toDateString()}
+              </span>
+            </div>
+            <p>{comment.body}</p>
           </div>
-          <p>Lorem ipsum dolor sit amet.</p>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import { BlogFooter } from "@/components/home/blog-footer";
 import Navbar from "@/components/home/header/Navbar";
 import HeroSection from "@/components/home/hero-section";

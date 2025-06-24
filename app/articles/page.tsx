@@ -2,10 +2,13 @@ import AllArticlePage from "@/components/article/all-article-page";
 import ArticleSearchInput from "@/components/article/article-search-input";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import Navbar from "@/components/home/header/Navbar";
 
 const page = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+          <Navbar />
+<div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="mb-12 space-y-6 text-center">
@@ -39,6 +42,7 @@ const page = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 
