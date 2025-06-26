@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import AllArticlesPageSkeleton from "@/components/article/all-articles-page-skeleton";
 import { BlogFooter } from "@/components/home/blog-footer";
 import Navbar from "@/components/home/header/Navbar";
 import HeroSection from "@/components/home/hero-section";
@@ -7,7 +8,6 @@ import TopArticles from "@/components/home/top-articles";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Suspense } from "react";
-import { AllArticlesPageSkeleton } from "../articles/page";
 
 export default function Home() {
   return (
