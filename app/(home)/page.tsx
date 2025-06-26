@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { BlogFooter } from "@/components/home/blog-footer";
 import Navbar from "@/components/home/header/Navbar";
@@ -10,7 +10,6 @@ import { Suspense } from "react";
 import { AllArticlesPageSkeleton } from "../articles/page";
 
 export default function Home() {
-
   return (
     <main>
       <Navbar />
@@ -25,7 +24,7 @@ export default function Home() {
               Discover our most popular and trending contents
             </p>
           </div>
-          <Suspense fallback={<AllArticlesPageSkeleton/>}>
+          <Suspense fallback={<AllArticlesPageSkeleton />}>
             <TopArticles />
           </Suspense>
 
