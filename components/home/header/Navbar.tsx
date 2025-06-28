@@ -34,44 +34,34 @@ function Navbar() {
               </span>
             </Link>
           </div>
+
+          {/* center nav links */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href={"/articles"}
-              className="text-sm font-medium text-foreground transition-colors hover:text-foreground"
-            >
+            <Link href={"/articles"} className="text-sm font-medium text-foreground hover:text-foreground">
               Articles
             </Link>
-            <Link
-              href={"/tutorials"}
-              className="text-sm font-medium text-foreground transition-colors hover:text-foreground"
-            >
+            <Link href={"/tutorials"} className="text-sm font-medium text-foreground hover:text-foreground">
               Tutorials
             </Link>
-            <Link
-              href={"/about"}
-              className="text-sm font-medium text-foreground transition-colors hover:text-foreground"
-            >
+            <Link href={"/about"} className="text-sm font-medium text-foreground hover:text-foreground">
               About
             </Link>
             {isSignedIn && (
-              <Link
-                href={"/dashboard"}
-                className="text-sm font-medium text-foreground transition-colors hover:text-foreground"
-              >
+              <Link href={"/dashboard"} className="text-sm font-medium text-foreground hover:text-foreground">
                 Dashboard
               </Link>
             )}
           </div>
-          {/* Right section  */}
-          <div className="flex items-center gap-4">
+
+          {/* Right section for desktop */}
+          <div className="hidden md:flex items-center gap-4">
             <SearchInput />
             <ToggelMode />
-            {/* user action */}
             <SignedIn>
               <UserButton />
             </SignedIn>
             <SignedOut>
-              <div className="hidden md:flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <SignInButton>
                   <Button variant={"outline"}>Login</Button>
                 </SignInButton>
@@ -82,17 +72,24 @@ function Navbar() {
             </SignedOut>
           </div>
 
-          {/* mobile menu */}
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className="md:hidden text-muted-foreground hover:text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu className="h-5 w-5" />}
-          </Button>
+          {/* Right section for mobile */}
+          <div className="flex md:hidden items-center gap-2">
+            <ToggelMode />
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <Button
+              variant={"ghost"}
+              size={"icon"}
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
       </div>
+
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden py-4 space-y-4 border-t">
