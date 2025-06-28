@@ -1,5 +1,5 @@
 "use client";
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 import AllArticlesPageSkeleton from "@/components/article/all-articles-page-skeleton";
 import { BlogFooter } from "@/components/home/blog-footer";
@@ -15,40 +15,42 @@ import toast from "react-hot-toast";
 export default function Home() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+
   useEffect(() => {
     if (error === "unauthenticated") {
       toast.error("Please log in first to access this page.");
       window.history.replaceState({}, "", window.location.pathname);
     }
   }, [error]);
-  return (
-    <main>
-      <Navbar />
-      <HeroSection />
-      <section className="relative py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-              Featured Articles
-            </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              Discover our most popular and trending contents
-            </p>
-          </div>
-          <Suspense fallback={<AllArticlesPageSkeleton />}>
-            <TopArticles />
-          </Suspense>
 
-          <div className="text-center mt-12">
-            <Link href={"/articles"}>
-              <Button className="rounded-full hover:bg-gray-900 hover:text-white dark:bg-white dark:hover:text-gray-900">
-                View all articles
-              </Button>
-            </Link>
+  return (
+    <Suspense fallback={<AllArticlesPageSkeleton />}>
+      <main>
+        <Navbar />
+        <HeroSection />
+        <section className="relative py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                Featured Articles
+              </h2>
+              <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+                Discover our most popular and trending contents
+              </p>
+            </div>
+            <TopArticles />
+
+            <div className="text-center mt-12">
+              <Link href={"/articles"}>
+                <Button className="rounded-full hover:bg-gray-900 hover:text-white dark:bg-white dark:hover:text-gray-900">
+                  View all articles
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-      <BlogFooter />
-    </main>
+        </section>
+        <BlogFooter />
+      </main>
+    </Suspense>
   );
 }
