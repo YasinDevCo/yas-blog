@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
+  
   try {
     const user = await currentUser();
 

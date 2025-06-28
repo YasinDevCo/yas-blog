@@ -1,3 +1,4 @@
+"use client";
 export const dynamic = "force-dynamic";
 
 import AllArticlesPageSkeleton from "@/components/article/all-articles-page-skeleton";
@@ -7,9 +8,19 @@ import HeroSection from "@/components/home/hero-section";
 import TopArticles from "@/components/home/top-articles";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+  useEffect(() => {
+    if (error === "unauthenticated") {
+      toast.error("Please log in first to access this page.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [error]);
   return (
     <main>
       <Navbar />
