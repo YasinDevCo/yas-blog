@@ -4,7 +4,6 @@ import React from "react";
 import Navbar from "@/components/home/header/Navbar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
 
 type ArticleDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -13,7 +12,7 @@ type ArticleDetailPageProps = {
 const page: React.FC<ArticleDetailPageProps> = async ({ params }) => {
   const { userId } = await auth();
   if (!userId) {
-    redirect("/?error=unauthenticated");
+    redirect("/");
   }
   const id = (await params).id;
   const article = await prisma.article.findUnique({

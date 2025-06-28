@@ -1,4 +1,3 @@
-// "use client";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Prisma } from "@prisma/client";
