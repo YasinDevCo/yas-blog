@@ -39,7 +39,7 @@ function Navbar() {
               Articles
             </Link>
             <Link
-              href={"/tutorial"}
+              href={"/tutorials"}
               className="text-sm font-medium text-foreground transition-colors hover:text-foreground"
             >
               Tutorials
